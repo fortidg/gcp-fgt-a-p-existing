@@ -74,14 +74,14 @@ locals {
     "fgt1-ha-ip" = {
       region       = local.region
       name         = "${local.prefix}-fgt1-ha-ip-${random_string.string.result}"
-      subnetwork   = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].id
+      subnetwork   = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].id
       address      = null
       address_type = "INTERNAL"
     }
     "fgt2-ha-ip" = {
       region       = local.region
       name         = "${local.prefix}-fgt2--ha-ip-${random_string.string.result}"
-      subnetwork   = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].id
+      subnetwork   = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].id
       address      = null
       address_type = "INTERNAL"
     }
