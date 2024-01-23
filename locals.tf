@@ -267,9 +267,9 @@ locals {
       healthcheck_port = var.healthcheck_port
       port1-ip         = google_compute_address.compute_address["fgt1-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt1-trust-ip"].address
-      port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].network
+      port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range
       port3-ip         = google_compute_address.compute_address["fgt1-ha-ip"].address
-      port3-sub        = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
+      port3-sub        = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].ip_cidr_range
       elb_ip           = google_compute_address.compute_address["elb-static-ip"].address
       ilb_ip           = google_compute_address.compute_address["ilb-ip"].address
       ext_gw           = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].gateway_address
@@ -286,9 +286,9 @@ locals {
       healthcheck_port = var.healthcheck_port
       port1-ip         = google_compute_address.compute_address["fgt2-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt2-trust-ip"].address
-      port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].network
+      port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range
       port3-ip         = google_compute_address.compute_address["fgt2-ha-ip"].address
-      port3-sub        = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
+      port3-sub        = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].ip_cidr_range
       elb_ip           = google_compute_address.compute_address["elb-static-ip"].address
       ilb_ip           = google_compute_address.compute_address["ilb-ip"].address
       ext_gw           = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].gateway_address

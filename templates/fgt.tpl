@@ -31,12 +31,7 @@ config system interface
     set mode static
     set ip ${port2-ip}/32
     set allowaccess probe-response
-    set secondary-IP enable
-     config secondaryip
-       edit 0
-         set ip ${ilb_ip}/32
-         set allowaccess probe-response
-       next
+    next
   end
   edit port3
     set mode static
@@ -89,10 +84,6 @@ config router static
   edit 0
     set device port3
     set dst ${port3-sub}
-    set gateway ${ha_gw}
-  next
-  edit 0
-    set device port3
     set gateway ${ha_gw}
   next
 end
