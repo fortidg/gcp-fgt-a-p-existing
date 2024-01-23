@@ -42,8 +42,9 @@ config system interface
     set mode static
     set ip ${port3-ip}/32
     set allowaccess ping https ssh fgfm
+    next
   end
-  next
+  
 end
 
 config system ha
