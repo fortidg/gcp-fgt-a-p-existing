@@ -32,7 +32,6 @@ config system interface
     set ip ${port2-ip}/32
     set allowaccess probe-response
     next
-  end
   edit port3
     set mode static
     set ip ${port3-ip}/32
