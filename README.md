@@ -1,9 +1,11 @@
 # GCP Active/Passive dual zone FortiGate POC
 
+This terraform will deploy a High Availability pair of FortiGate VMs with 3 interfaces.  Port1 will be in the "untrust" network, port 2 will be in the "trust" network and port 3 will serve as heartbeat and management.  There are no Public IP's assigned to port1.  This design uses a "Load Balancer Sandwich", with FortiGates in a back end set.  The external load balancer has been assigned a public IP address.  Port3 on both FortiGates have been assigned public IP addresses.  You will be able to manage the FortiGates with these.
+
 ## How do you run these?
 
 1. Log into GCP console and open a cloud shell.
-1. use `git clone https://github.com/fortidg/gcp-fgt-a_a_existing.git` to clone this repo.
+1. use `git clone https://github.com/fortidg/gcp-fgt-a-p-existing.git` to clone this repo.
 1. Open `terraform.tfvars.example`Change the name to 'terraform.tfvars' update the required variables (project, region, zone zone2, prefix, fortigate_vm_image, fortigate_machine_type)   
 1. Run `terraform get`.
 1. Run `terraform init`.
@@ -21,7 +23,7 @@ If you wish to deploy FortGates in only one zone, you can use the same value for
 FortiGates can be managed by putting `https://<fortigate-public-ip>:8443` into the url bar of your favorite browser. These IP addresses will be part of the Terraform outputs upon using apply.
 
 
-This terraform will use existing customer subnets/networks.  It is assumed that Cloud NAT router and cloud nat are already configured in the "untrust" subnet.  If that is not the case, un-comment those stanzas in the resources.tf file.
+This terraform will use existing customer subnets/networks.  It is assumed that Cloud NAT router and cloud nat are already configured in the "untrust" and "ha/management" subnets.
 
 This terraform assumes that customer networks already have firewall rules in place.  You will need to update them based on the below link:
 
