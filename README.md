@@ -6,7 +6,7 @@ This terraform will deploy a High Availability pair of FortiGate VMs with 3 inte
 
 1. Log into GCP console and open a cloud shell.
 1. use `git clone https://github.com/fortidg/gcp-fgt-a-p-existing.git` to clone this repo.
-1. Open `terraform.tfvars.example`Change the name to 'terraform.tfvars' update the required variables (project, region, zone zone2, prefix, fortigate_vm_image, fortigate_machine_type)   
+1. Open `terraform.tfvars.example`Change the name to 'terraform.tfvars' update the required variables (project, region, zone, zone2, prefix, untrust_subnet1_name, truste_subnet1_name, ha_subnet1_name, fortigate_vm_image, fortigate_machine_type)   
 1. Run `terraform get`.
 1. Run `terraform init`.
 1. Run `terraform plan`.
