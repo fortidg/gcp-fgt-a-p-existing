@@ -80,11 +80,6 @@ config router static
     set dst ${port2-sub}
     set gateway ${int_gw}
   next
-  edit 0
-    set device port3
-    set dst ${port3-sub}
-    set gateway ${ha_gw}
-  next
 end
 
 config system probe-response
