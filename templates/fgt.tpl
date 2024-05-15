@@ -24,14 +24,21 @@ config system interface
        edit 0
          set ip ${elb_ip}/32
          set allowaccess probe-response
-       next
+      next
   end   
   next
   edit port2
     set mode static
     set ip ${port2-ip}/32
     set allowaccess probe-response
+    set secondary-IP enable
+    config secondaryip
+      edit 0
+        set ip ${ilb_ip}/32
+        set allowaccess probe-response
     next
+  end
+  next
   edit port3
     set mode static
     set ip ${port3-ip}/32
