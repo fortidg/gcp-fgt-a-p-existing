@@ -102,7 +102,6 @@ locals {
     "ha-subnet-1" = {
       name = var.ha_subnet1_name
     }
-
   }
 
 

@@ -103,9 +103,11 @@ resource "google_compute_region_backend_service" "ibes" {
 
   backend {
     group = each.value.group1
+    balancing_mode = "CONNECTION"
   }
   backend {
     group = each.value.group2
+    balancing_mode = "CONNECTION"
   }
 
   health_checks = [google_compute_region_health_check.health_check.self_link]
@@ -122,9 +124,11 @@ resource "google_compute_region_backend_service" "ebes" {
 
   backend {
     group = each.value.group1
+    balancing_mode = "CONNECTION"
   }
   backend {
     group = each.value.group2
+    balancing_mode = "CONNECTION"
   }
 
   health_checks = [google_compute_region_health_check.health_check.self_link]
