@@ -102,11 +102,11 @@ resource "google_compute_region_backend_service" "ibes" {
   protocol = "UNSPECIFIED"
 
   backend {
-    group = each.value.group1
+    group          = each.value.group1
     balancing_mode = "CONNECTION"
   }
   backend {
-    group = each.value.group2
+    group          = each.value.group2
     balancing_mode = "CONNECTION"
   }
 
@@ -123,11 +123,11 @@ resource "google_compute_region_backend_service" "ebes" {
   protocol              = "UNSPECIFIED"
 
   backend {
-    group = each.value.group1
+    group          = each.value.group1
     balancing_mode = "CONNECTION"
   }
   backend {
-    group = each.value.group2
+    group          = each.value.group2
     balancing_mode = "CONNECTION"
   }
 
@@ -144,6 +144,7 @@ resource "google_compute_forwarding_rule" "ifwd_rule" {
   ip_address            = each.value.ip_address
   all_ports             = true
   load_balancing_scheme = each.value.load_balancing_scheme
+  ip_protocol           = "L3_DEFAULT"
   backend_service       = each.value.backend_service
   allow_global_access   = true
 }
@@ -157,6 +158,7 @@ resource "google_compute_forwarding_rule" "efwd_rule" {
   ip_address            = each.value.ip_address
   all_ports             = true
   load_balancing_scheme = each.value.load_balancing_scheme
+  ip_protocol           = "L3_DEFAULT"
   backend_service       = each.value.backend_service
 
 }
@@ -167,6 +169,6 @@ resource "google_compute_route" "default_route" {
   name         = "${var.prefix}-rt-default-via-fgt-${random_string.string.result}"
   dest_range   = "0.0.0.0/0"
   network      = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].network
-  next_hop_ilb = google_compute_forwarding_rule.ifwd_rule["ilb_fwd_1"].self_link
+  next_hop_ilb = google_compute_address.compute_address["ilb-ip"].address
   priority     = 100
 }

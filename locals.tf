@@ -181,9 +181,9 @@ locals {
       }]
 
       network_interface = [{
-        network    = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].network
-        subnetwork = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].name
-        network_ip = google_compute_address.compute_address["fgt1-untrust-ip"].address
+        network       = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].network
+        subnetwork    = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].name
+        network_ip    = google_compute_address.compute_address["fgt1-untrust-ip"].address
         access_config = []
         },
         {
@@ -193,12 +193,12 @@ locals {
           access_config = []
         },
         {
-          network       = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
-          subnetwork    = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].name
-          network_ip    = google_compute_address.compute_address["fgt1-ha-ip"].address
+          network    = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
+          subnetwork = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].name
+          network_ip = google_compute_address.compute_address["fgt1-ha-ip"].address
           access_config = [{
-          nat_ip = google_compute_address.compute_address["fgt1-static-ip"].address
-        }]
+            nat_ip = google_compute_address.compute_address["fgt1-static-ip"].address
+          }]
       }]
 
       metadata = {
@@ -224,9 +224,9 @@ locals {
       }]
 
       network_interface = [{
-        network    = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].network
-        subnetwork = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].name
-        network_ip = google_compute_address.compute_address["fgt2-untrust-ip"].address
+        network       = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].network
+        subnetwork    = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].name
+        network_ip    = google_compute_address.compute_address["fgt2-untrust-ip"].address
         access_config = []
         },
         {
@@ -236,12 +236,12 @@ locals {
           access_config = []
         },
         {
-          network       = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
-          subnetwork    = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].name
-          network_ip    = google_compute_address.compute_address["fgt2-ha-ip"].address
+          network    = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
+          subnetwork = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].name
+          network_ip = google_compute_address.compute_address["fgt2-ha-ip"].address
           access_config = [{
-          nat_ip = google_compute_address.compute_address["fgt2-static-ip"].address
-        }]
+            nat_ip = google_compute_address.compute_address["fgt2-static-ip"].address
+          }]
       }]
 
       metadata = {
