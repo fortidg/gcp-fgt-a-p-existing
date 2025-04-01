@@ -7,6 +7,8 @@ data "template_file" "template_file" {
     admin_port       = var.admin_port
     fgt_password     = var.fgt_password
     healthcheck_port = var.healthcheck_port
+    fgt_license_flexvm = each.value.fgt_license_flexvm
+    fgt_license_file = each.value.fgt_license_file
     port1-ip         = each.value.port1-ip
     port2-ip         = each.value.port2-ip
     port2-sub        = each.value.port2-sub

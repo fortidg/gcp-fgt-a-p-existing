@@ -115,7 +115,7 @@ config firewall policy
 end
 
 
-%{ if fgt_license_flexvm != null }
+%{ if fgt_license_flexvm != "" }
 --==GCP==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
