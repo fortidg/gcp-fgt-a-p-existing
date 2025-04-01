@@ -9,6 +9,7 @@ locals {
   fortigate_machine_type  = var.fortigate_machine_type
   fortigate_vm_image      = var.fortigate_vm_image
   fortigate_license_files = var.fortigate_license_files
+  flex_tokens            = var.flex_tokens
 
   #######################
   # Static IPs
@@ -203,8 +204,7 @@ locals {
 
       metadata = {
         user-data = data.template_file.template_file["fgt1-template"].rendered
-        license   = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
-        LICENSE-TOKEN = local.flex_tokens[0] != "" ? local.flex_tokens[0] : null
+        #license   = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
       }
       service_account_scopes    = ["cloud-platform"]
       allow_stopping_for_update = true
@@ -247,8 +247,7 @@ locals {
 
       metadata = {
         user-data = data.template_file.template_file["fgt2-template"].rendered
-        license   = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
-        LICENSE-TOKEN = local.flex_tokens[1] != "" ? local.flex_tokens[1] : null
+        #license   = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
       }
       service_account_scopes    = ["cloud-platform"]
       allow_stopping_for_update = true
@@ -266,6 +265,8 @@ locals {
       admin_port       = var.admin_port
       fgt_password     = var.fgt_password
       healthcheck_port = var.healthcheck_port
+      fgt_license_flexvm = local.flex_tokens[0] != "" ? local.flex_tokens[0] : null
+      fgt_license_file  = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
       port1-ip         = google_compute_address.compute_address["fgt1-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt1-trust-ip"].address
       port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range
@@ -285,6 +286,8 @@ locals {
       admin_port       = var.admin_port
       fgt_password     = var.fgt_password
       healthcheck_port = var.healthcheck_port
+      fgt_license_flexvm = local.flex_tokens[1] != "" ? local.flex_tokens[1] : null
+      fgt_license_file = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
       port1-ip         = google_compute_address.compute_address["fgt2-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt2-trust-ip"].address
       port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range

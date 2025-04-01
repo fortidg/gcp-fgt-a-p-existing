@@ -14,7 +14,7 @@ prefix = "resource-prefix"
 # 7.2.6 BYOL is projects/fortigcp-project-001/global/images/fortinet-fgt-726-20231016-001-w-license
 # 7.4.1 PAYG is projects/fortigcp-project-001/global/images/fortinet-fgtondemand-741-20230905-001-w-license
 # 7.4.1 BYOL is projects/fortigcp-project-001/global/images/fortinet-fgt-741-20230905-001-w-license
-fortigate_vm_image     = "projects/fortigcp-project-001/global/images/fortinet-fgt-741-20230905-001-w-license"
+fortigate_vm_image     = "projects/fortigcp-project-001/global/images/fortinet-fgt-747-20250123-001-w-license"
 fortigate_machine_type = "n2-standard-4"
 fortigate_license_files = {
   fgt1_instance    = { name = null }

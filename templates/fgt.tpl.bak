@@ -1,8 +1,3 @@
-Content-Type: multipart/mixed; boundary="==GCP=="
-MIME-Version: 1.0
-
---==GCP==
-
 config system global
     set admin-sport ${admin_port}
     set hostname ${fgt_name}
@@ -113,26 +108,3 @@ config firewall policy
         set comments "out to internet"
     next
 end
-
-
-%{ if fgt_license_flexvm != null }
---==GCP==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="license"
-
-LICENSE-TOKEN:${fgt_license_flexvm}
-
-%{ endif }
-%{ if fgt_license_file != "" }
---==GCP==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="license"
-
-${fgt_license_file}
-
-%{ endif }
---==GCP==--
