@@ -55,3 +55,9 @@ variable "ha_netmask" {
   description = "netmask of the ha subnet"
   default     = "255.255.255.0"
 }
+
+variable "flex_tokens" {
+  type        = list(string)
+  default     = ["", ""]
+  description = "List of FortiFlex tokens to be applied during bootstrapping"
+}

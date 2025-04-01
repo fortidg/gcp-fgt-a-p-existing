@@ -20,6 +20,8 @@ fortigate_license_files = {
   fgt1_instance    = { name = null }
   fgt2_instance = { name = null }
 }
+
+flex_tokens = ["", ""]
 admin_port = 8443
 fgt_password = "fortinet"
 

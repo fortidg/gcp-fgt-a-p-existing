@@ -204,6 +204,7 @@ locals {
       metadata = {
         user-data = data.template_file.template_file["fgt1-template"].rendered
         license   = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
+        LICENSE-TOKEN = local.flex_tokens[0] != "" ? local.flex_tokens[0] : null
       }
       service_account_scopes    = ["cloud-platform"]
       allow_stopping_for_update = true
@@ -247,6 +248,7 @@ locals {
       metadata = {
         user-data = data.template_file.template_file["fgt2-template"].rendered
         license   = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
+        LICENSE-TOKEN = local.flex_tokens[1] != "" ? local.flex_tokens[1] : null
       }
       service_account_scopes    = ["cloud-platform"]
       allow_stopping_for_update = true
