@@ -8,7 +8,7 @@ locals {
 
   fortigate_machine_type  = var.fortigate_machine_type
   fortigate_vm_image      = var.fortigate_vm_image
-  fgt_license_files = var.fortigate_license_files
+  fortigate_license_files = var.fortigate_license_files
   flex_tokens            = var.flex_tokens
 
   #######################
