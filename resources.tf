@@ -172,3 +172,20 @@ resource "google_compute_route" "default_route" {
   next_hop_ilb = google_compute_address.compute_address["ilb-ip"].address
   priority     = 100
 }
+
+# resource "google_compute_firewall" "compute_firewall" {
+#   for_each = local.compute_firewalls
+
+#   name               = each.value.name
+#   network            = each.value.network
+#   direction          = each.value.direction
+#   source_ranges      = each.value.source_ranges
+#   destination_ranges = each.value.destination_ranges
+
+#   dynamic "allow" {
+#     for_each = each.value.allow
+#     content {
+#       protocol = allow.value.protocol
+#     }
+#   }
+# }

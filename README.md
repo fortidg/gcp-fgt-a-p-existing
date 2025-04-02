@@ -14,11 +14,26 @@ This terraform will deploy a High Availability pair of FortiGate VMs with 3 inte
 
 The prefix mentioned above is simply a memorable string of text to differentiate the resources deployed by this code.
 
-If you use the Pay As You Go (PAYG) image or if you want to use FortiFlex, leave the Fortigate names in terraform.tfvars set as null.  
+### Licensing
 
-If you would like use the Bring Your Own License (BYOL) image, please add the license files in the local directory and modify the names  in terraform.tfvars accordingly.  You need to set the license_type to If you leave the names as null for the BYOL instance, you can manually upload the licenses later or use FortiFlex.
+There are three options for licensing the FortiGate VMs:
 
-In order to use FortiFlex entitlements, youwill ne
+"flex" (default) - Set license_type to "flex" and add two unused FortiFlex tokens to the "flex_tokens" variable.  Ensure you are using the BYOL FortiGate image.  For Example:
+
+```sh
+flex_tokens = ["C5095E394QAZ3E640112", "DC65640C2QAZDD9CBC76"]
+```
+
+"byol" - Set license_type to "byol" and copy two valid fortigate licenses into the local directory.  Ensure you are using the BYOL FortiGate image. Update terraform.tfvars with the names of the licenses.  For example:
+
+```sh
+fortigate_license_files = {
+  fgt1_instance    = { name = license1.lic }
+  fgt2_instance = { name = license2.lic }
+}
+```
+
+"payg" - Set license_type to "payg" and ensure that you are using the PAYG FortiGate Image  
 
 If you wish to deploy FortGates in only one zone, you can use the same value for "zone" and "zone2".
 
@@ -33,4 +48,4 @@ https://docs.fortinet.com/document/fortigate/6.4.0/ports-and-protocols/303168/fo
 
 In addition to those ports, you will need to allow tcp 8008 in both the trust and untrust subnets to allow heartbeat probes for load balancers.
 
-Conversely, if you wish to allow all you can un-comment the firewall stanzas in resources.tf . 
+Conversely, if you wish to allow all you can un-comment the compute_firewall stanzas in resources.tf.

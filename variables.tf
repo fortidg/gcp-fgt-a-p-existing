@@ -65,5 +65,5 @@ variable "flex_tokens" {
 variable "license_type" {
   type        = string
   default     = "flex"
-  description = "License type: flex or byol"
+  description = "License type: flex, payg or byol"
 }

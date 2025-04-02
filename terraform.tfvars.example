@@ -10,10 +10,8 @@ ha_subnet1_name = "existing ha subnet
 prefix = "resource-prefix"
 
 # FortiGate image and instance type
-# 7.2.6 PAYG is projects/fortigcp-project-001/global/images/fortinet-fgtondemand-726-20231016-001-w-license
-# 7.2.6 BYOL is projects/fortigcp-project-001/global/images/fortinet-fgt-726-20231016-001-w-license
-# 7.4.1 PAYG is projects/fortigcp-project-001/global/images/fortinet-fgtondemand-741-20230905-001-w-license
-# 7.4.1 BYOL is projects/fortigcp-project-001/global/images/fortinet-fgt-741-20230905-001-w-license
+# 7.4.7 PAYG is projects/fortigcp-project-001/global/images/fortinet-fgt-747-20250123-001-w-license
+# 7.4.7 PAYG is projects/fortigcp-project-001/global/images/fortinet-fgtondemand-747-20250123-001-w-license
 fortigate_vm_image     = "projects/fortigcp-project-001/global/images/fortinet-fgt-747-20250123-001-w-license"
 fortigate_machine_type = "n2-standard-4"
 fortigate_license_files = {
@@ -21,7 +19,7 @@ fortigate_license_files = {
   fgt2_instance = { name = null }
 }
 license_type = "flex" # can be byol, flex, or payg, make sure the license is correct for the sku
-flex_tokens = ["", ""]
+flex_tokens = ["token1", "token2"]
 admin_port = 8443
 fgt_password = "fortinet"
 
