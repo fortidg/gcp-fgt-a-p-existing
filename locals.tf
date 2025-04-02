@@ -10,6 +10,7 @@ locals {
   fortigate_vm_image      = var.fortigate_vm_image
   fortigate_license_files = var.fortigate_license_files
   flex_tokens            = var.flex_tokens
+  license_type = var.license_type
 
   #######################
   # Static IPs
@@ -265,8 +266,9 @@ locals {
       admin_port       = var.admin_port
       fgt_password     = var.fgt_password
       healthcheck_port = var.healthcheck_port
-      fgt_license_flexvm = local.flex_tokens[0] != "" ? local.flex_tokens[0] : null
-      fgt_license_file  = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
+      license_type    = var.license_type
+      license_token = local.flex_tokens[0] != "" ? local.flex_tokens[0] : null
+      license_file  = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
       port1-ip         = google_compute_address.compute_address["fgt1-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt1-trust-ip"].address
       port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range
@@ -286,8 +288,9 @@ locals {
       admin_port       = var.admin_port
       fgt_password     = var.fgt_password
       healthcheck_port = var.healthcheck_port
-      fgt_license_flexvm = local.flex_tokens[1] != "" ? local.flex_tokens[1] : null
-      fgt_license_file = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
+      license_type    = var.license_type
+      license_token = local.flex_tokens[1] != "" ? local.flex_tokens[1] : null
+      license_file = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
       port1-ip         = google_compute_address.compute_address["fgt2-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt2-trust-ip"].address
       port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range

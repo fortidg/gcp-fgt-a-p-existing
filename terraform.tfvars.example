@@ -20,7 +20,7 @@ fortigate_license_files = {
   fgt1_instance    = { name = null }
   fgt2_instance = { name = null }
 }
-
+license_type = "flex" # can be byol, flex, or payg, make sure the license is correct for the sku
 flex_tokens = ["", ""]
 admin_port = 8443
 fgt_password = "fortinet"

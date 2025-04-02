@@ -1,7 +1,8 @@
-Content-Type: multipart/mixed; boundary="==GCP=="
+Content-Type: multipart/mixed; boundary="==FGTCONF=="
 MIME-Version: 1.0
 
---==GCP==
+--==FGTCONF==
+
 
 config system global
     set admin-sport ${admin_port}
@@ -115,24 +116,25 @@ config firewall policy
 end
 
 
-%{ if fgt_license_flexvm != "" }
---==GCP==
+%{ if license_type == "flex" }
+--==FGTCONF==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="license"
 
-LICENSE-TOKEN:${fgt_license_flexvm}
+LICENSE-TOKEN:${license_token}
 
 %{ endif }
-%{ if fgt_license_file != "" }
---==GCP==
+%{ if license_type == "byol" }
+--==FGTCONF==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="license"
 
-${fgt_license_file}
+${file(license_file)}
 
 %{ endif }
---==GCP==--
+
+--==FGTCONF==--

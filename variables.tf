@@ -61,3 +61,9 @@ variable "flex_tokens" {
   default     = ["", ""]
   description = "List of FortiFlex tokens to be applied during bootstrapping"
 }
+
+variable "license_type" {
+  type        = string
+  default     = "flex"
+  description = "License type: flex or byol"
+}
