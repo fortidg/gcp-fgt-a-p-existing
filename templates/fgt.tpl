@@ -2,7 +2,10 @@ Content-Type: multipart/mixed; boundary="==FGTCONF=="
 MIME-Version: 1.0
 
 --==FGTCONF==
-
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="config"
 
 config system global
     set admin-sport ${admin_port}
