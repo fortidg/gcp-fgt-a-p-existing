@@ -57,6 +57,17 @@ config system interface
   
 end
 
+%{ if license_type == "flex" }
+--==FGTCONF==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="license"
+
+LICENSE-TOKEN:${license_token}
+
+%{ endif }
+
 config system ha
     set group-name "group1"
     set mode a-p
@@ -119,16 +130,7 @@ config firewall policy
 end
 
 
-%{ if license_type == "flex" }
---==FGTCONF==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="license"
 
-LICENSE-TOKEN:${license_token}
-
-%{ endif }
 %{ if license_type == "byol" }
 --==FGTCONF==
 Content-Type: text/plain; charset="us-ascii"
