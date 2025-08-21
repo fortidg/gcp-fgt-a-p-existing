@@ -5,6 +5,7 @@ zone2 = "az2 name"
 untrust_subnet1_name = "existing untrust subnet"
 trust_subnet1_name = "existing trust subnet"
 ha_subnet1_name = "existing ha subnet
+mgmt_subnet1_name = "existing management_subnet"
 
 # Prefixed to all resources
 prefix = "resource-prefix"

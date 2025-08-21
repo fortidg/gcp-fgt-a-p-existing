@@ -87,6 +87,20 @@ locals {
       address      = null
       address_type = "INTERNAL"
     }
+    "fgt1-mgmt-ip" = {
+      region       = local.region
+      name         = "${local.prefix}-fgt1-mgmt-ip-${random_string.string.result}"
+      subnetwork   = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].id
+      address      = null
+      address_type = "INTERNAL"
+    }
+    "fgt2-mgmt-ip" = {
+      region       = local.region
+      name         = "${local.prefix}-fgt2-mgmt-ip-${random_string.string.result}"
+      subnetwork   = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].id
+      address      = null
+      address_type = "INTERNAL"
+    }
   }
 
 
@@ -103,6 +117,9 @@ locals {
     }
     "ha-subnet-1" = {
       name = var.ha_subnet1_name
+    }
+    "mgmt-subnet-1" = {
+      name = var.mgmt_subnet1_name
     }
   }
 
@@ -198,12 +215,19 @@ locals {
           network    = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
           subnetwork = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].name
           network_ip = google_compute_address.compute_address["fgt1-ha-ip"].address
+          access_config = []
+          },
+          {
+          network    = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].network
+          subnetwork = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].name
+          network_ip = google_compute_address.compute_address["fgt1-mgmt-ip"].address
           access_config = [{
             nat_ip = google_compute_address.compute_address["fgt1-static-ip"].address
           }]
       }]
 
       metadata = {
+        enable-oslogin = "FALSE"
         user-data = data.template_file.template_file["fgt1-template"].rendered
         #license   = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
       }
@@ -241,12 +265,19 @@ locals {
           network    = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].network
           subnetwork = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].name
           network_ip = google_compute_address.compute_address["fgt2-ha-ip"].address
+          access_config = []
+          },
+          {
+          network    = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].network
+          subnetwork = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].name
+          network_ip = google_compute_address.compute_address["fgt2-mgmt-ip"].address
           access_config = [{
             nat_ip = google_compute_address.compute_address["fgt2-static-ip"].address
           }]
       }]
 
       metadata = {
+        enable-oslogin = "FALSE"
         user-data = data.template_file.template_file["fgt2-template"].rendered
         #license   = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
       }
@@ -268,17 +299,20 @@ locals {
       healthcheck_port = var.healthcheck_port
       license_type    = var.license_type
       license_token = local.flex_tokens[0] != "" ? local.flex_tokens[0] : null
-      license_file  = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
+      license_file  = local.fortigate_license_files["fgt1_instance"].name != null ? local.fortigate_license_files["fgt1_instance"].name : null
       port1-ip         = google_compute_address.compute_address["fgt1-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt1-trust-ip"].address
       port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range
       port3-ip         = google_compute_address.compute_address["fgt1-ha-ip"].address
       port3-sub        = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].ip_cidr_range
+      port4-ip         = google_compute_address.compute_address["fgt1-mgmt-ip"].address
+      port4-sub        = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].ip_cidr_range
       elb_ip           = google_compute_address.compute_address["elb-static-ip"].address
       ilb_ip           = google_compute_address.compute_address["ilb-ip"].address
       ext_gw           = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].gateway_address
       int_gw           = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].gateway_address
       ha_gw            = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].gateway_address
+      mgmt_gw          = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].gateway_address
       other_fgt_ha_ip  = google_compute_address.compute_address["fgt2-ha-ip"].address
       priority         = 255
     }
@@ -290,17 +324,20 @@ locals {
       healthcheck_port = var.healthcheck_port
       license_type    = var.license_type
       license_token = local.flex_tokens[1] != "" ? local.flex_tokens[1] : null
-      license_file = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
+      license_file = local.fortigate_license_files["fgt2_instance"].name != null ? local.fortigate_license_files["fgt2_instance"].name : null
       port1-ip         = google_compute_address.compute_address["fgt2-untrust-ip"].address
       port2-ip         = google_compute_address.compute_address["fgt2-trust-ip"].address
       port2-sub        = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].ip_cidr_range
       port3-ip         = google_compute_address.compute_address["fgt2-ha-ip"].address
       port3-sub        = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].ip_cidr_range
+      port4-ip         = google_compute_address.compute_address["fgt2-mgmt-ip"].address
+      port4-sub        = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].ip_cidr_range
       elb_ip           = google_compute_address.compute_address["elb-static-ip"].address
       ilb_ip           = google_compute_address.compute_address["ilb-ip"].address
       ext_gw           = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].gateway_address
       int_gw           = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].gateway_address
       ha_gw            = data.google_compute_subnetwork.compute_subnetwork["ha-subnet-1"].gateway_address
+      mgmt_gw          = data.google_compute_subnetwork.compute_subnetwork["mgmt-subnet-1"].gateway_address
       other_fgt_ha_ip  = google_compute_address.compute_address["fgt1-ha-ip"].address
       priority         = 100
     }

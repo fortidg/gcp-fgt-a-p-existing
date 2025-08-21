@@ -49,7 +49,10 @@ variable "ha_subnet1_name" {
   type        = string
   description = "name of the ha subnet"
 }
-
+variable "mgmt_subnet1_name" {
+  type        = string
+  description = "name of the management subnet"
+}
 variable "ha_netmask" {
   type        = string
   description = "netmask of the ha subnet"

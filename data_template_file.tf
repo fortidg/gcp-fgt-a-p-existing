@@ -15,11 +15,14 @@ data "template_file" "template_file" {
     port2-sub        = each.value.port2-sub
     port3-ip         = each.value.port3-ip
     port3-sub        = each.value.port3-sub
+    port4-ip         = each.value.port4-ip
+    port4-sub        = each.value.port4-sub
     elb_ip           = each.value.elb_ip
     ilb_ip           = each.value.ilb_ip
     ext_gw           = each.value.ext_gw
     int_gw           = each.value.int_gw
     ha_gw            = each.value.ha_gw
+    mgmt_gw          = each.value.mgmt_gw
     other_fgt_ha_ip  = each.value.other_fgt_ha_ip
     priority         = each.value.priority
     ha_netmask       = var.ha_netmask

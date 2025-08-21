@@ -51,22 +51,15 @@ config system interface
   edit port3
     set mode static
     set ip ${port3-ip}/32
+    set allowaccess ping
+  next
+  edit port4
+    set mode static
+    set ip ${port4-ip}/32
     set allowaccess ping https ssh fgfm
     next
-  end
-  
+  end 
 end
-
-%{ if license_type == "flex" }
---==FGTCONF==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="license"
-
-LICENSE-TOKEN:${license_token}
-
-%{ endif }
 
 config system ha
     set group-name "group1"
@@ -76,8 +69,8 @@ config system ha
     set ha-mgmt-status enable
     config ha-mgmt-interfaces
         edit 1
-            set interface "port3"
-            set gateway ${ha_gw}
+            set interface "port4"
+            set gateway ${mgmt_gw}
         next
     end
     set override disable
@@ -129,7 +122,16 @@ config firewall policy
     next
 end
 
+%{ if license_type == "flex" }
+--==FGTCONF==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="license"
 
+LICENSE-TOKEN:${license_token}
+
+%{ endif }
 
 %{ if license_type == "byol" }
 --==FGTCONF==

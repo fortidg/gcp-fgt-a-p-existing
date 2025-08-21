@@ -7,6 +7,9 @@ output "fgt2_ip" {
   value = format("https://%s:8443", google_compute_address.compute_address["fgt2-static-ip"].address)
 }
 
+output "nlb_ip" {
+  value = google_compute_address.compute_address["elb-static-ip"].address
+}
 
 # FGT-Username
 output "fgt_username" {

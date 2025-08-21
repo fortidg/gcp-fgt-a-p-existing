@@ -1,12 +1,12 @@
 # GCP Active/Passive dual zone FortiGate POC
 
-This terraform will deploy a High Availability pair of FortiGate VMs with 3 interfaces.  Port1 will be in the "untrust" network, port 2 will be in the "trust" network and port 3 will serve as heartbeat and management.  There are no Public IP's assigned to port1.  This design uses a "Load Balancer Sandwich", with FortiGates in a back end set.  The external load balancer has been assigned a public IP address.  Port3 on both FortiGates have been assigned public IP addresses.  You will be able to manage the FortiGates with these.
+This terraform will deploy a High Availability pair of FortiGate VMs with 3 interfaces.  Port1 will be in the "untrust" network, port 2 will be in the "trust" network port 3 will serve as heartbeat and port 4 will be management.  There are no Public IP's assigned to port1.  This design uses a "Load Balancer Sandwich", with FortiGates in a back end set.  The external load balancer has been assigned a public IP address.  Port3 on both FortiGates have been assigned public IP addresses.  You will be able to manage the FortiGates with these.
 
 ## How do you run these?
 
 1. Log into GCP console and open a cloud shell.
 1. use `git clone https://github.com/fortidg/gcp-fgt-a-p-existing.git` to clone this repo.
-1. Open `terraform.tfvars.example`Change the name to 'terraform.tfvars' update the required variables (project, region, zone, zone2, prefix, untrust_subnet1_name, truste_subnet1_name, ha_subnet1_name, fortigate_vm_image, fortigate_machine_type)   
+1. Open `terraform.tfvars.example`Change the name to 'terraform.tfvars' update the required variables (project, region, zone, zone2, prefix, untrust_subnet1_name, trust_subnet1_name, ha_subnet1_name, mgmt_subnet1_name, fortigate_vm_image, fortigate_machine_type)
 1. Run `terraform get`.
 1. Run `terraform init`.
 1. Run `terraform plan`.
