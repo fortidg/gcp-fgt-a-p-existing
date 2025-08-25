@@ -139,6 +139,16 @@ locals {
         protocol = "all"
       }]
     }
+    "untrust-vpc-egress" = {
+      name               = "${random_string.string.result}egress-untrust-vpc-allow-all"
+      network            = data.google_compute_subnetwork.compute_subnetwork["untrust-subnet-1"].network
+      direction          = "EGRESS"
+      source_ranges      = null
+      destination_ranges = ["0.0.0.0/0"]
+      allow = [{
+        protocol = "all"
+      }]
+    }
     "trust-vpc-ingress" = {
       name               = "${random_string.string.result}ingress-trust-vpc-allow-all"
       network            = data.google_compute_subnetwork.compute_subnetwork["trust-subnet-1"].network
@@ -227,7 +237,7 @@ locals {
       }]
 
       metadata = {
-        enable-oslogin = "FALSE"
+        enable-oslogin = "TRUE"
         user-data = data.template_file.template_file["fgt1-template"].rendered
         #license   = local.fortigate_license_files["fgt1_instance"].name != null ? file(local.fortigate_license_files["fgt1_instance"].name) : null
       }
@@ -277,7 +287,7 @@ locals {
       }]
 
       metadata = {
-        enable-oslogin = "FALSE"
+        enable-oslogin = "TRUE"
         user-data = data.template_file.template_file["fgt2-template"].rendered
         #license   = local.fortigate_license_files["fgt2_instance"].name != null ? file(local.fortigate_license_files["fgt2_instance"].name) : null
       }
